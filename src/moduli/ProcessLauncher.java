@@ -55,12 +55,16 @@ public class ProcessLauncher {
         params.add(classPath);
         params.add("net.minecraft.client.main.Main");
         params.add("-username="+username);
-        params.add("-accessToken "+sessionKey);
+        params.add("-session "+sessionKey);
         params.add("-version 1.6.4");
         params.add("-gameDir "+getWorkingDirectory().getPath());
         //params.add("-assetsDir "+getWorkingDirectory().getPath()+"\\assets");
-        //params.add("-userProperties {}");
-        //params.add("-uuid 294c588d44ea4324a389587f0e7f9d02");
+        //params.add("-resourcePackDir " + dir);
+        //params.add("-width " + dir);
+        //params.add("-height " + dir);
+        //params.add("-fullscreen");
+        ////params.add("-userProperties {}");
+        ////params.add("-uuid 294c588d44ea4324a389587f0e7f9d02");
         
         System.out.println(params.toString());
         ProcessBuilder pb = new ProcessBuilder(params);
@@ -100,7 +104,7 @@ public class ProcessLauncher {
         return out;
     }
     
-    private static File getWorkingDirectory() {
+    public static File getWorkingDirectory() {
         
         String userHome = System.getProperty("user.home", ".");
         File workingDirectory;

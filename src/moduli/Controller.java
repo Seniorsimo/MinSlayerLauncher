@@ -9,5 +9,11 @@ package moduli;
  * @author simone
  */
 public class Controller {
+    private state status = state.loading;
     
+    
+    
+    private static enum state{
+        loading, idle, logging, waiting, option, running;
+    }
 }
