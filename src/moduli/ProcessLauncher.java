@@ -45,20 +45,28 @@ public class ProcessLauncher {
         //add here class that need to be loaded before minecraft but after libraries
         
         //minecraft
-        classPath += ";" + path + "bin/minecraft.jar";
+        classPath += ";" + path + "1.6.4.jar";
                 
         //start a new process
         ArrayList<String> params = new ArrayList<>();
         params.add("java");
         params.add("-Djava.library.path=" + getWorkingDirectory().toURI().getPath() + "natives/");
+        params.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
+        
         params.add("-classpath");
         params.add(classPath);
-        params.add("net.minecraft.client.main.Main");
+        //params.add("net.minecraft.client.main.Main");
+        params.add("net.minecraft.launchwrapper.Launch");
+        /*params.add("-jar");
+        params.add(path + "1.6.4.jar");*/
+        
         params.add("-username="+username);
-        params.add("-session "+sessionKey);
+        params.add("-session="+sessionKey);
         params.add("-version 1.6.4");
-        params.add("-gameDir "+getWorkingDirectory().getPath());
-        //params.add("-assetsDir "+getWorkingDirectory().getPath()+"\\assets");
+        params.add("-gameDir="+getWorkingDirectory().getPath()+"\\minecraft");
+        params.add("-assetsDir="+getWorkingDirectory().getPath()+"\\assets");
+        params.add("-tweakClass=cpw.mods.fml.common.launcher.FMLTweaker");
+        //params.add("-Dfml.ignorePatchDiscrepancies=true");
         //params.add("-resourcePackDir " + dir);
         //params.add("-width " + dir);
         //params.add("-height " + dir);
