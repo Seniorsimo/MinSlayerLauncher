@@ -28,7 +28,7 @@ public class LauncherLogger {
     private int logEntry = 2000;
     
     public LauncherLogger(){
-        logList = new ArrayList<>();
+        logList = new ArrayList<String>();
         LoggerPrintStream lps = new LoggerPrintStream();
         PrintStream myOut = new PrintStream(lps);
         oldOut = System.out;

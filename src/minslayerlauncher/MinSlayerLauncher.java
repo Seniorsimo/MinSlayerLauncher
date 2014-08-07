@@ -26,7 +26,7 @@ public class MinSlayerLauncher {
         
         LauncherLogger lg = new LauncherLogger();
         
-        LoginManager lm = new LoginManager();
+        /*LoginManager lm = new LoginManager();
         lm.setUsername("seniorsimo@hotmail.it");
         //lm.setPassword("");
         lm.setAccessToken("51edfbcf43d04b018ca054db927ae7b0");
@@ -44,5 +44,8 @@ public class MinSlayerLauncher {
         //pc.setSessionKey("294c588d44ea4324a389587f0e7f9d02");
         pc.setSessionKey(lm.getAccessToken());
         pc.launch();
+        * */
+        
+        
     }
 }

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.openal.AL;
 
 /**
  *
@@ -36,22 +38,27 @@ public class ProcessLauncher {
         String path = getWorkingDirectory().toURI().getPath();
         
         //add here class that need to be loaded before libraries
+        classPath += "" + path + "core/OptiFine_ultra.jar";
+        classPath += ";" + path + "core/minecraftforge.jar";
+        //classPath += ";" + path + "core/OptiFine.jar";
         
         //libraries
         File f = new File(path + "libraries");
-        classPath += "" + f.toURI().getPath();
+        classPath += ";" + f.toURI().getPath();
         classPath += addLibrary(f);
         
         //add here class that need to be loaded before minecraft but after libraries
         
         //minecraft
         classPath += ";" + path + "1.6.4.jar";
+        //classPath += ";" + path + "minecraft.jar";
                 
         //start a new process
-        ArrayList<String> params = new ArrayList<>();
+        ArrayList<String> params = new ArrayList<String>();
         params.add("java");
         params.add("-Djava.library.path=" + getWorkingDirectory().toURI().getPath() + "natives/");
         params.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
+        params.add("-Dfml.ignorePatchDiscrepancies=true");
         
         params.add("-classpath");
         params.add(classPath);
@@ -66,7 +73,7 @@ public class ProcessLauncher {
         params.add("-gameDir="+getWorkingDirectory().getPath()+"\\minecraft");
         params.add("-assetsDir="+getWorkingDirectory().getPath()+"\\assets");
         params.add("-tweakClass=cpw.mods.fml.common.launcher.FMLTweaker");
-        //params.add("-Dfml.ignorePatchDiscrepancies=true");
+        
         //params.add("-resourcePackDir " + dir);
         //params.add("-width " + dir);
         //params.add("-height " + dir);
@@ -78,6 +85,14 @@ public class ProcessLauncher {
         ProcessBuilder pb = new ProcessBuilder(params);
         pb.redirectErrorStream(true);
         
+//        System.out.println(LWJGLUtil.getPlatform());
+//        String[] libname = new String[] { "OpenAL64.dll", "OpenAL32.dll" };
+//        String[] test = LWJGLUtil.getLibraryPaths("OpenAL32", libname, AL.class.getClassLoader());
+//        for(String s:test){
+//            System.out.println("--" + s);
+//        }
+//        
+//        
         Process process;
         try {
             process = pb.start();
