@@ -4,6 +4,7 @@
  */
 package minslayerlauncher;
 
+import moduli.DataManager;
 import moduli.LauncherLogger;
 import moduli.LoginManager;
 import moduli.ProcessLauncher;
@@ -45,7 +46,16 @@ public class MinSlayerLauncher {
         pc.setSessionKey(lm.getAccessToken());
         pc.launch();
         * */
+        DataManager dm = DataManager.getDataManager();
         
+        /*String test = "string to test";
+        Integer i = new Integer(7);
+        
+        dm.save(test, "testString");
+        dm.save(i, "testInteger");
+        
+        System.out.println(dm.load("testString"));
+        System.out.println(dm.load("testInteger"));*/
         
     }
 }
