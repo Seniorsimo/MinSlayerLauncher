@@ -4,6 +4,7 @@
  */
 package minslayerlauncher;
 
+import moduli.Controller;
 import moduli.DataManager;
 import moduli.LauncherLogger;
 import moduli.LoginManager;
@@ -46,7 +47,7 @@ public class MinSlayerLauncher {
         pc.setSessionKey(lm.getAccessToken());
         pc.launch();
         * */
-        DataManager dm = DataManager.getDataManager();
+        //DataManager dm = DataManager.getDataManager();
         
         /*String test = "string to test";
         Integer i = new Integer(7);
@@ -56,6 +57,8 @@ public class MinSlayerLauncher {
         
         System.out.println(dm.load("testString"));
         System.out.println(dm.load("testInteger"));*/
+        
+        Controller c = new Controller();
         
     }
 }
