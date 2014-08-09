@@ -5,9 +5,13 @@
 package gui.bar;
 
 import gui.LauncherPanel;
+import gui.bar.dialog.EditProfileDialog;
+import gui.bar.dialog.NewProfileDialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import moduli.Controller;
@@ -22,19 +26,40 @@ public class LaunchPanel extends LauncherPanel{
     private JButton editButton, newButton, launchButton;
     private JComboBox<String> profileSelect;
     
-    public LaunchPanel(Controller controller){
+    public LaunchPanel(final Controller controller){
         super();
         this.controller = controller;
         
         //costruzione
         editButton = new JButton("Edit");
+        editButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new EditProfileDialog(controller, (String)profileSelect.getSelectedItem());
+            }
+        });
         newButton = new JButton("Create new");
+        newButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NewProfileDialog(controller);
+            }
+        });
         String[] temp = controller.getProfileList();
         if(temp.length==0){
             temp = new String[]{"Please create a profile"};
         }
         profileSelect = new JComboBox(temp);
         profileSelect.setSelectedItem(controller.getAccount().getAccount());
+        profileSelect.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.selectProfile((String)profileSelect.getSelectedItem());
+            }
+        });
         LauncherPanel row1 = new LauncherPanel();
         row1.setLayout(new FlowLayout());
         row1.add(profileSelect);

@@ -20,7 +20,7 @@ public class Controller {
     
     public Controller(){
         accounts = (ArrayList<String>) DataManager.getDataManager().load("saved_accounts");
-        if(account==null)
+        if(accounts==null)
             accounts = new ArrayList<>();
         String lastUser = (String) DataManager.getDataManager().load("last_user");
         if(lastUser!=null)
@@ -36,18 +36,41 @@ public class Controller {
         //rivedi process launcher in modo che prenda tutti i parametri veramete richiesti
     }
     
-    public void editProfile(){
-        
+    public void editProfile(String username){
+        DataManager.getDataManager().remove(account.getAccount());
+        accounts.remove(account.getAccount());
+        account.setAccount(username);
+        DataManager.getDataManager().save(account, account.getAccount());
+        accounts.add(account.getAccount());
+        DataManager.getDataManager().save(accounts, "saved_accounts");
+        DataManager.getDataManager().save(account.getAccount(), "last_user");
+    }
+    
+    public void deleteProfile(){
+        DataManager.getDataManager().remove(account.getAccount());
+        accounts.remove(account.getAccount());
+        DataManager.getDataManager().save(accounts, "saved_accounts");
+        if(accounts.size()>0)
+            account = (Account) DataManager.getDataManager().load(accounts.get(0));
+        else
+            account = new Account(defaultOption, "guest");
+        DataManager.getDataManager().save(account.getAccount(), "last_user");
     }
     
     public void createProfile(String username){
         account = new Account(defaultOption, username);
         DataManager.getDataManager().save(account, account.getAccount());
+        DataManager.getDataManager().save(account.getAccount(), "last_user");
         accounts.add(account.getAccount());
         DataManager.getDataManager().save(accounts, "saved_accounts");
         
         //aggiornare???
         
+    }
+    
+    public void selectProfile(String username){
+        account = (Account) DataManager.getDataManager().load(username);
+        DataManager.getDataManager().save(account.getAccount(), "last_user");
     }
     
     public String[] getProfileList(){

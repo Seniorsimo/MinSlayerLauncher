@@ -6,6 +6,7 @@ package moduli;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -60,6 +61,19 @@ public class DataManager {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public void remove(String key){
+        try{
+            File file = new File(path + key);
+            if(file.delete()){
+                System.out.println(file.getName() + " is deleted!");
+            }else{
+                System.out.println("Delete operation is failed.");
+            }
+    	}catch(Exception e){
+            e.printStackTrace();
+    	}
     }
     
     public static DataManager getDataManager(){
