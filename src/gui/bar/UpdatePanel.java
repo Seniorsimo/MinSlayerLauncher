@@ -82,9 +82,9 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
                 break;
             case "download":
                 string1.setText("Download "+ currentIndex + "/"+ total);
-                x = (int) ((int)(Integer.parseInt(currentIndex)*100.0/Integer.parseInt(total))/100.0*70);
+                x = (int) ((int)(Integer.parseInt(currentIndex)*100.0/Integer.parseInt(total))/100.0*90);
                 if(x<0) x = 0;
-                if(x>70) x = 70;
+                if(x>90) x = 90;
                 bar1.setValue(x);
                 string2.setText("Downloading "+nameFile);
                 y = (int) percent;
@@ -101,33 +101,34 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
             case "install":
                 z = 1;
                 string1.setText("Installation "+ z + "/" + totalFile);
-                bar1.setValue(70);
+                bar1.setValue(90);
                 string2.setText("");
                 bar2.setValue(0);
                 break;
-            case "instal2":
-                string1.setText("Installation "+ (++z) + "/" + totalFile);
-                temp = (int) (z*100/Integer.parseInt(totalFile));
-                x = (int) (temp/100*20);
+            case "install2":
+                z++;
+                string1.setText("Installation "+ z + "/" + totalFile);
+                temp = (int) (z*100.0/Integer.parseInt(totalFile));
+                x = (int) (temp/100.0*8);
                 if(x<0) x = 0;
-                if(x>20) x = 20;
-                bar1.setValue(70+x);
+                if(x>8) x = 8;
+                bar1.setValue(90+x);
                 string2.setText("Installing: "+ nameFile);
                 bar2.setValue(temp);
                 break;
             case "ending":
                 string1.setText("Removing temporary files ");
-                bar1.setValue(90);
+                bar1.setValue(98);
                 string2.setText("Tuning your installation....");
                 bar2.setValue(0);
                 break;
             case "ending2":
                 string1.setText("Removing temporary files: " + currentIndex + "/" + total);
-                temp = (int) (Integer.parseInt(currentIndex)*100/Integer.parseInt(totalFile));
-                x = (int) (temp/100*10);
+                temp = (int) (Integer.parseInt(currentIndex)*100.0/Integer.parseInt(totalFile));
+                x = (int) (temp/100.0*2);
                 if(x<0) x = 0;
-                if(x>10) x = 10;
-                bar1.setValue(90+x);
+                if(x>2) x = 2;
+                bar1.setValue(98+x);
                 bar2.setValue(temp);
                 break;
             case "end":

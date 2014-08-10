@@ -33,7 +33,7 @@ import moduli.Updater;
 public class GameUpdater extends Updater{
     
     private HashMap versions;
-    private HashMap toUpdate;
+    private HashMap toUpdate, fileList;
     private ArrayList<String> toUpdateUrls;
     private String baseUrl = "https://dl.dropboxusercontent.com/u/238575247/minslayer/";
     private UpdateListener gui;
@@ -45,6 +45,7 @@ public class GameUpdater extends Updater{
             versions = new HashMap();
         }
         toUpdate = new HashMap();
+        fileList = new HashMap();
         toUpdateUrls = new ArrayList<>();
     }
 
@@ -69,10 +70,11 @@ public class GameUpdater extends Updater{
                 String path = newVersion.substring(0, newVersion.lastIndexOf("#"));
                 String version = newVersion.substring(newVersion.lastIndexOf("#")+1);
                 //System.out.println(path + "  " + version);
-                if(!versions.containsKey(path)||(long)versions.get(path)<Long.parseLong(version)){
+                if(!versions.containsKey(path)||Long.parseLong((String)versions.get(path))<Long.parseLong(version)){
                     toUpdate.put(path, version);
                     toUpdateUrls.add(path);
                 }
+                fileList.put(path, version);
             }
         //se daaggiornare è vuoto restituisci false, altrimenti true
         } catch (MalformedURLException ex) {
@@ -101,7 +103,7 @@ public class GameUpdater extends Updater{
             gui.refreshStatus("download", ""+counter, total+"", url, 0);
             if(!download(url))
                 error = true;
-            versions.remove(url);
+            //versions.remove(url);
             gui.refreshStatus("download", ""+counter, total+"", url, 100);
             counter++;
         }
@@ -119,6 +121,15 @@ public class GameUpdater extends Updater{
         if(!install(ProcessLauncher.getWorkingDirectory())) error = true;
         
         //come fare x file "da rimuovere" se vechi e non più necessari?
+        Iterator index = fileList.entrySet().iterator();
+        HashMap fileList2 = new HashMap();
+        while(index.hasNext()){
+            Map.Entry pairs = (Map.Entry) index.next();
+            versions.remove((String)pairs.getKey());
+            fileList2.put((String)pairs.getKey(), (String)pairs.getValue());
+            index.remove();
+        }
+        
         gui.refreshStatus("ending", "", "", "", 0);
         if(!versions.isEmpty()){
             Iterator it = versions.entrySet().iterator();
@@ -129,11 +140,11 @@ public class GameUpdater extends Updater{
                 Map.Entry pairs = (Map.Entry)it.next();
                 //System.out.println(pairs.getKey() + " = " + pairs.getValue());
                 remove((String)pairs.getKey());
-                
+                current++;
                 it.remove(); // avoids a ConcurrentModificationException
             }
         }
-        versions = toUpdate;
+        versions = fileList2;
         DataManager.getDataManager().save(versions, "versions");
         gui.refreshStatus("end", "0", "0", "", 100);
         //se errori false altriemnti true
