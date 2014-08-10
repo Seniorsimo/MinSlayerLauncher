@@ -11,6 +11,12 @@ import moduli.Updater;
  * @author simone
  */
 public class LauncherUpdater extends Updater{
+    
+    private long launcherVersion = 111;
+    
+    public LauncherUpdater(){
+        
+    }
 
     @Override
     public boolean checkVersion() {

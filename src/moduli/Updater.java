@@ -4,12 +4,14 @@
  */
 package moduli;
 
+import java.util.HashMap;
+
 /**
  *
  * @author simone
  */
 public abstract class Updater {
-        
+            
     public static boolean update(Updater up){
         
         return false;
