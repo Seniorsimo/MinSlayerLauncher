@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Logger;
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.openal.AL;
+//import org.lwjgl.LWJGLUtil;
+//import org.lwjgl.openal.AL;
 
 /**
  *
