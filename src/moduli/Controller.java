@@ -4,8 +4,11 @@
  */
 package moduli;
 
+import gui.LauncherPanel;
 import gui.MainWindow;
 import java.util.ArrayList;
+import moduli.updater.GameUpdater;
+import moduli.updater.LauncherUpdater;
 
 /**
  *
@@ -30,6 +33,17 @@ public class Controller {
         
         //infine avvia la gui
         new MainWindow(this);
+        
+        
+        
+    }
+    
+    public void checkUpdate(UpdateListener lp){
+        //launcher
+        
+        //client
+        Updater.update(new GameUpdater(lp));
+        
     }
     
     public void launch(){

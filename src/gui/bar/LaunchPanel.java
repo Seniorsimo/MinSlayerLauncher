@@ -87,7 +87,7 @@ public class LaunchPanel extends LauncherPanel{
     private void refreshList(){
         String[] temp = controller.getProfileList();
         if(temp.length==0){
-            temp = new String[]{"Please create a profile"};
+            temp = new String[]{"<empty>"};
         }
         profileSelect = new JComboBox(temp);
         profileSelect.setSelectedItem(controller.getAccount().getAccount());

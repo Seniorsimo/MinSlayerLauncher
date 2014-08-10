@@ -13,8 +13,12 @@ import java.util.HashMap;
 public abstract class Updater {
             
     public static boolean update(Updater up){
+        if(up.checkVersion()){
+            if(!up.download()) return false;
+            if(!up.install()) return false;
+        }
         
-        return false;
+        return true;
     }
     
     public static void reboot(){

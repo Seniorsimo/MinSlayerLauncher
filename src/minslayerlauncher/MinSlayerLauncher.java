@@ -9,6 +9,8 @@ import moduli.DataManager;
 import moduli.LauncherLogger;
 import moduli.LoginManager;
 import moduli.ProcessLauncher;
+import moduli.Updater;
+import moduli.updater.GameUpdater;
 
 /**
  *
@@ -59,6 +61,8 @@ public class MinSlayerLauncher {
         System.out.println(dm.load("testInteger"));*/
         
         Controller c = new Controller();
+        
+        //Updater.update(new GameUpdater());
         
     }
 }
