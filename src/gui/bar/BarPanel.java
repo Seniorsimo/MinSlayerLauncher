@@ -23,7 +23,8 @@ public class BarPanel extends LauncherPanel{
         
         //cotruzione
         update = new UpdatePanel(controller);
-        launch = new LaunchPanel(controller);
+        launch = new LaunchPanel(controller, this.getWidth());
+        System.out.println(this.getWidth());
         
         this.setLayout(new BorderLayout());
         this.add(update, BorderLayout.CENTER);

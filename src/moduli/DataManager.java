@@ -30,6 +30,9 @@ public class DataManager {
     
     private DataManager(){
         path = ProcessLauncher.getWorkingDirectory().toURI().getPath() +  "launcherData/";
+        File dir = new File(path);
+        if(!dir.exists())
+            dir.mkdir();
         
     }
     

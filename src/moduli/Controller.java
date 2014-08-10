@@ -73,6 +73,10 @@ public class Controller {
         DataManager.getDataManager().save(account.getAccount(), "last_user");
     }
     
+    public void saveSetting(){
+        DataManager.getDataManager().save(account, account.getAccount());
+    }
+    
     public String[] getProfileList(){
         return accounts.toArray(new String[accounts.size()]);
     }

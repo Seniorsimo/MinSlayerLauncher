@@ -24,6 +24,7 @@ public class MainWindow extends JFrame{
         this.controller = controller;
         //setting varie
         this.setSize(800, 600);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new MainPanel(controller);
         this.getContentPane().add("Center", panel);
