@@ -4,12 +4,12 @@
  */
 package moduli;
 
+import java.util.List;
+
 /**
  *
- * @author simone
+ * @author Simone
  */
-public abstract class Streamer {
-    
-    public abstract void getData();
-    
+public interface StreamerListener {
+    public void refreshData(List l);
 }

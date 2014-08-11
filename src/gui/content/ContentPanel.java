@@ -5,6 +5,7 @@
 package gui.content;
 
 import gui.LauncherPanel;
+import java.awt.GridLayout;
 import moduli.Controller;
 
 /**
@@ -20,8 +21,9 @@ public class ContentPanel extends LauncherPanel{
         this.controller = controller;
         
         //provvadere all'aggiunta di qualcosa di utile
-        
-        
+        this.setLayout(new GridLayout(1,2));
+        this.add(new ImagePanel(controller));
+        this.add(new StreamerPanel(controller));
     }
     
 }
