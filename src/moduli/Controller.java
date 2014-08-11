@@ -40,9 +40,14 @@ public class Controller {
     
     public void checkUpdate(UpdateListener lp){
         //launcher
+        if(!Updater.update(new LauncherUpdater(lp))){
+            System.out.println("Error occurred while trying to donwload launcher update.");
+        }
         
         //client
-        Updater.update(new GameUpdater(lp));
+        if(!Updater.update(new GameUpdater(lp))){
+            System.out.println("Error occurred while trying to donwload game update.");
+        }
         
     }
     

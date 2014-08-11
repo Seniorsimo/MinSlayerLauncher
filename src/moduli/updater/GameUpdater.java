@@ -198,11 +198,11 @@ public class GameUpdater extends Updater{
                 File old = new File(f.toURI().getPath().substring(0, f.toURI().getPath().lastIndexOf(".temp")));
                 if(old.exists()) if(!old.delete()) error = true;
                 f.renameTo(old);
-                gui.refreshStatus("install2", "", "", "old.toURI().getPath()", 0);
+                gui.refreshStatus("install2", "", "", old.toURI().getPath(), 0);
                 System.out.println("Installed: " + old.toURI().getPath());
             }
         }
-        return error;
+        return !error;
     }
     
     private void remove(String path){
