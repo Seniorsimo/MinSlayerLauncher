@@ -6,7 +6,11 @@ package gui.content.sreamer;
 
 import gui.LauncherPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,8 +20,11 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import moduli.Controller;
 import moduli.StreamerListener;
 import moduli.streamer.NewsStreamer;
@@ -55,6 +62,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
         LauncherPanel[] pList = new LauncherPanel[list.size()];
         for(int i=0; i<pList.length; i++){
             LauncherPanel panel = new LauncherPanel();
+            panel.setLayout(new BorderLayout());
             final Post p = list.remove(0);
             LauncherPanel header = new LauncherPanel();
             header.setLayout(new BorderLayout());
@@ -93,24 +101,46 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             header.add(date, BorderLayout.SOUTH);
             
             LauncherPanel text = new LauncherPanel();
-            text.add(new JTextArea(p.getContent()));
+            text.setLayout(new GridLayout(1,1));
+            //JTextArea tp = new JTextArea(p.getContent());
+            JEditorPane tp = new JEditorPane("text/html","");
+            tp.setText(p.getContent());
+            tp.setEditable(false);
+            tp.setBackground(new Color(0,0,0,0));
+            //tp.setLineWrap(true);
+            //tp.setWrapStyleWord(true);
+            text.add(tp);
             
             panel.add(header, BorderLayout.NORTH);
             panel.add(text, BorderLayout.CENTER);
             
             pList[i] = panel;
             
-            build(pList);
         }
+        build(pList);
     }
 
     private void build(LauncherPanel[] list) {
         this.removeAll();
         if(list!=null){
-            this.setLayout(new GridLayout(list.length,1));
+            //FlowLayout l = new FlowLayout(FlowLayout.LEFT);
+            this.setAutoscrolls(true);
+            this.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.NORTHWEST;
+            gbc.weightx = 0.0;
+            gbc.weighty = 0.0;
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = 10;
+            
+            
             for(LauncherPanel p:list){
-                this.add(p);
+                this.add(p, gbc);
             }
+            gbc.weightx = 1.0;
+            gbc.weighty = 1.0;
+            this.add(new JLabel(), gbc);
         }
         revalidate();
     }

@@ -8,7 +8,11 @@ import gui.LauncherPanel;
 import gui.content.sreamer.ChangePanel;
 import gui.content.sreamer.NewsPanel;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JButton;
 import moduli.Controller;
 import moduli.StreamerListener;
 import moduli.streamer.NewsStreamer;
@@ -23,28 +27,54 @@ public class StreamerPanel extends LauncherPanel{
     private Controller controller;
     private LauncherPanel bar, news, change;
     private int showing = 0;
+    private JButton bt;
     
     public StreamerPanel(Controller controller){
         super();
         this.controller = controller;
         
         bar = new LauncherPanel();
+        bar.setLayout(new BorderLayout());
+        bt = new JButton();
+        bt.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchPanel();
+            }
+        });
+        bar.add(bt, BorderLayout.EAST);
         news = new NewsPanel(controller);
         change = new ChangePanel(controller);
         
         this.setLayout(new BorderLayout());
         
-        refreshView(0);
+        refreshView();
         
         
     }
 
-    private void refreshView(int i) {
+    private void refreshView() {
         this.removeAll();
         this.add(bar, BorderLayout.NORTH);
-        if(showing==0) this.add(news, BorderLayout.CENTER);
-        else this.add(change, BorderLayout.CENTER);
-        revalidate();
+        if(showing==0){
+            this.add(news, BorderLayout.CENTER);
+            bt.setText("Changelog");
+        }
+        else{
+            this.add(change, BorderLayout.CENTER);
+            bt.setText("News");
+        }
+        this.revalidate();
+        this.repaint();
+        
+        //news.revalidate();
+    }
+    
+    private void switchPanel(){
+        if(showing==0) showing=1;
+        else showing=0;
+        refreshView();
     }
 
 }

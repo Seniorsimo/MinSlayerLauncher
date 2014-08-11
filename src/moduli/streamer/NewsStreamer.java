@@ -4,6 +4,7 @@
  */
 package moduli.streamer;
 
+import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -47,13 +48,13 @@ public class NewsStreamer extends Streamer{
             //Diamo in pasto il nostro reader al parser RSS
             SyndFeedInput in = new SyndFeedInput();
             SyndFeed feed = in.build(reader);
-            System.out.println("Titolo Feed: "+ feed.getAuthor());
+            //System.out.println("Titolo Feed: "+ feed.getAuthor());
             list = new ArrayList<>();
-             
+            //System.out.println(feed.getEntries().size());
             for (Iterator<SyndEntry> i = feed.getEntries().iterator(); i.hasNext();) {
                 //Iteriamo tutte le voci presenti nel nostro feed e ne stampiano le proprietà fondmentali
                 SyndEntry entry = i.next();
-                Post p = new Post(entry.getTitle(), entry.getLink(), entry.getPublishedDate(), entry.getDescription().getValue());
+                Post p = new Post(entry.getTitle(), entry.getLink(), entry.getPublishedDate(), ((SyndContentImpl)(entry.getContents().get(0))).getValue());
 //                System.out.println("titolo:" + entry.getTitle());
 //                System.out.println("link:" + entry.getLink());
 //                System.out.println("descrizione:" + entry.getDescription().getValue()+"n");
