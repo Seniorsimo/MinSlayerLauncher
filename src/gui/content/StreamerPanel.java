@@ -15,6 +15,7 @@ import java.util.List;
 import javax.swing.JButton;
 import moduli.Controller;
 import moduli.StreamerListener;
+import moduli.Style;
 import moduli.streamer.NewsStreamer;
 import moduli.streamer.NewsStreamer.Post;
 
@@ -36,6 +37,9 @@ public class StreamerPanel extends LauncherPanel{
         bar = new LauncherPanel();
         bar.setLayout(new BorderLayout());
         bt = new JButton();
+        bt.setFont(Style.buttonFont);
+        bt.setBackground(Style.buttonBackground);
+        bt.setForeground(Style.buttonForeground);
         bt.addActionListener(new ActionListener(){
 
             @Override

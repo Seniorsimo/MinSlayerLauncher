@@ -7,8 +7,10 @@ package gui;
 import gui.bar.BarPanel;
 import gui.content.ContentPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import moduli.Controller;
+import moduli.Style;
 
 /**
  *
@@ -39,6 +41,8 @@ public class MainWindow extends JFrame{
         public MainPanel(Controller controller){
             super();
             this.controller = controller;
+            this.setOpaque(true);
+            this.setBackground(Style.mainBackground);
             
             //parametri vari
             

@@ -5,6 +5,7 @@
 package gui;
 
 import javax.swing.JDialog;
+import moduli.Style;
 
 /**
  *
@@ -14,6 +15,7 @@ public class MainDialog extends JDialog {
     public MainDialog(){
         super();
         this.setModal(true);
+        this.getContentPane().setBackground(Style.mainBackground);
         
         //setting dei dialog
 

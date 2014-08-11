@@ -16,7 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.border.EmptyBorder;
 import moduli.Controller;
+import moduli.Style;
 
 /**
  *
@@ -27,17 +29,21 @@ public class LaunchPanel extends LauncherPanel{
     private Controller controller;
     private JButton editButton, newButton, optionButton,  launchButton;
     private JComboBox<String> profileSelect;
-    private LauncherPanel row1;
+    private LauncherPanel row1, row1Bis;
     
     public LaunchPanel(final Controller controller, int width){
         super();
         this.controller = controller;
+        this.setBorder(new EmptyBorder(10,10,10,10));
         
         //costruzione
-        this.setPreferredSize(new Dimension(280, 100));
+        this.setPreferredSize(new Dimension(280, 120));
         row1 = new LauncherPanel();
         
         editButton = new JButton("Edit");
+        editButton.setFont(Style.buttonFont);
+        editButton.setBackground(Style.buttonBackground);
+        editButton.setForeground(Style.buttonForeground);
         editButton.addActionListener(new ActionListener(){
 
             @Override
@@ -47,6 +53,9 @@ public class LaunchPanel extends LauncherPanel{
             }
         });
         newButton = new JButton("New");
+        newButton.setFont(Style.buttonFont);
+        newButton.setBackground(Style.buttonBackground);
+        newButton.setForeground(Style.buttonForeground);
         newButton.addActionListener(new ActionListener(){
 
             @Override
@@ -57,6 +66,9 @@ public class LaunchPanel extends LauncherPanel{
         });
         
         optionButton = new JButton("Setting");
+        optionButton.setFont(Style.buttonFont);
+        optionButton.setBackground(Style.buttonBackground);
+        optionButton.setForeground(Style.buttonForeground);
         optionButton.addActionListener(new ActionListener(){
 
             @Override
@@ -65,22 +77,30 @@ public class LaunchPanel extends LauncherPanel{
             }
         });
         
+        row1Bis = new LauncherPanel();
+        row1Bis.setLayout(new FlowLayout(FlowLayout.LEADING));
+        row1Bis.add(editButton);
+        row1Bis.add(newButton);
+        row1Bis.add(optionButton);
         
-        row1.setLayout(new FlowLayout());
-        row1.setPreferredSize(new Dimension(280,50));
+        row1.setLayout(new GridLayout(2,1));
+        //row1.setPreferredSize(new Dimension(280,20));
         
         refreshList();
         
         
         
         launchButton = new JButton("Launch");
+        launchButton.setFont(Style.buttonFont);
+        launchButton.setBackground(Style.buttonBackground);
+        launchButton.setForeground(Style.buttonForeground);
         LauncherPanel row2 = new LauncherPanel();
         row2.setLayout(new BorderLayout());
         row2.add(launchButton, BorderLayout.CENTER);
         
-        this.setLayout(new GridLayout(2,1));
-        this.add(row1);
-        this.add(row2);
+        this.setLayout(new BorderLayout());
+        this.add(row1,BorderLayout.CENTER);
+        this.add(row2,BorderLayout.SOUTH);
         
     }
     
@@ -100,9 +120,7 @@ public class LaunchPanel extends LauncherPanel{
         });
         row1.removeAll();
         row1.add(profileSelect);
-        row1.add(editButton);
-        row1.add(newButton);
-        row1.add(optionButton);
+        row1.add(row1Bis);
         row1.revalidate();
     }
     

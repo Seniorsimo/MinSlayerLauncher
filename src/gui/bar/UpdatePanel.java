@@ -10,7 +10,14 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.ProgressBarUI;
+import javax.swing.plaf.basic.BasicProgressBarUI;
+import javax.swing.plaf.metal.MetalProgressBarUI;
+import javax.swing.plaf.multi.MultiProgressBarUI;
+import javax.swing.plaf.synth.SynthProgressBarUI;
 import moduli.Controller;
+import moduli.Style;
 import moduli.UpdateListener;
 
 /**
@@ -37,21 +44,28 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
         this.setLayout(new GridLayout(4,1));
         
         string1 = new JLabel("");
+        string1.setForeground(Style.mainForeground);
         string2 = new JLabel("");
+        string2.setForeground(Style.mainForeground);
         bar1 = new JProgressBar(0, 100);
         bar1.setValue(0);
         bar1.setStringPainted(true);
+        bar1.setOpaque(false);
         //bar1.setSize(280, 20);
         //current.setLocation(10, 140);
-        bar1.setForeground(new Color(0xFF9933));
-        bar1.setBackground(new Color(0xD8D8D8));
+        bar1.setForeground(Style.barForeground);
+        bar1.setBackground(Style.barBackground);
         bar2 = new JProgressBar(0, 100);
         bar2.setValue(0);
         bar2.setStringPainted(true);
+        bar2.setOpaque(false);
         //bar1.setSize(280, 20);
         //current.setLocation(10, 140);
-        bar2.setForeground(new Color(0xFF9933));
-        bar2.setBackground(new Color(0xD8D8D8));
+        bar2.setForeground(Style.barForeground);
+        bar2.setBackground(Style.barBackground);
+        
+        this.setBorder(new EmptyBorder(10,10,10,10));
+        
         showPanel();
         final UpdatePanel up = this;
 

@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -27,6 +29,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import moduli.Controller;
 import moduli.StreamerListener;
+import moduli.Style;
 import moduli.streamer.NewsStreamer;
 import moduli.streamer.NewsStreamer.Post;
 
@@ -43,6 +46,18 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
         build(null);
         final NewsPanel np = this;
         
+        //custom font
+//        try {
+//             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("A.ttf"));
+//        } catch (IOException|FontFormatException e) {
+//             //Handle exception
+//        }
+        
+        
+        
+        
+        
         Thread t = new Thread(){
          @Override
          public void run(){
@@ -52,6 +67,11 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
         };
         //SwingUtilities.invokeLater(t);
         t.start();
+        
+//        Font[] list = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+//        for(Font f:list){
+//            System.out.println(f.getFontName());
+//        }
     }
     
     
@@ -67,6 +87,10 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             LauncherPanel header = new LauncherPanel();
             header.setLayout(new BorderLayout());
             JLabel title = new JLabel(p.getTitle());
+            
+            title.setForeground(new Color(227,189,38));
+            title.setFont(Style.titleFont);
+            
             title.addMouseListener(new MouseListener(){
 
                 @Override
@@ -97,16 +121,22 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
                 }
             });
             JLabel date = new JLabel(p.getDate().toString());
+            
+            date.setForeground(Color.white);
+            date.setFont(Style.dateFont);
+            
             header.add(title, BorderLayout.CENTER);
             header.add(date, BorderLayout.SOUTH);
             
             LauncherPanel text = new LauncherPanel();
             text.setLayout(new GridLayout(1,1));
             //JTextArea tp = new JTextArea(p.getContent());
-            JEditorPane tp = new JEditorPane("text/html","");
-            tp.setText(p.getContent());
+            JEditorPane tp = new JEditorPane("text/html",Style.postPosts+p.getContent()+ Style.postPosts);
+            //tp.setText(p.getContent());
             tp.setEditable(false);
             tp.setBackground(new Color(0,0,0,0));
+            tp.setOpaque(false);
+            
             //tp.setLineWrap(true);
             //tp.setWrapStyleWord(true);
             text.add(tp);

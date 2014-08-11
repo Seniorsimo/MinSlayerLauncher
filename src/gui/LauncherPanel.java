@@ -18,6 +18,7 @@ public class LauncherPanel extends JPanel {
         super();
         //modifiche varie
         this.setVisible(true);
+        this.setOpaque(false);
     }
     
     

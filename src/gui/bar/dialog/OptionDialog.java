@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import moduli.Controller;
 import moduli.OptionManager;
+import moduli.Style;
 
 /**
  *
@@ -34,6 +35,7 @@ public class OptionDialog extends MainDialog{
     public OptionDialog(Controller controller){
         super();
         this.controller = controller;
+        
         
         //edit
         this.setTitle("Setting");
