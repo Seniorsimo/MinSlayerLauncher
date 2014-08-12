@@ -4,8 +4,19 @@
  */
 package moduli;
 
+import gui.MainDialog;
 import gui.MainWindow;
+import gui.bar.dialog.PasswordDialog;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import moduli.updater.GameUpdater;
 import moduli.updater.LauncherUpdater;
 
@@ -51,7 +62,48 @@ public class Controller {
     }
     
     public void launch(){
-        //rivedi process launcher in modo che prenda tutti i parametri veramete richiesti
+        
+        ProcessLauncher pl = new ProcessLauncher(this);
+        
+        LoginManager lm = new LoginManager();
+        Account a = getAccount();
+        lm.setUsername(a.getAccount());
+        lm.setAccessToken(a.getAccessToken());
+        lm.setClientToken(a.getClientToken());
+        
+        boolean success = false;
+        if(lm.keyLogin()){
+            success = true;
+        }
+        
+        else{
+            //richiedi password
+            String pass = askPassword();
+            
+            lm.setPassword(pass);
+            if(lm.passLogin()){
+                success = true;
+            }
+        }
+        
+        if(success){
+            a.setAccessToken(lm.getAccessToken());
+            a.setClientToken(lm.getClientToken());
+            DataManager.getDataManager().save(a, a.getAccount());
+            
+            pl.setUsername(lm.getMinecraftName());
+            pl.setSessionKey(lm.getAccessToken());
+            
+            pl.launch();
+        }
+        else{
+            System.out.println("Errore: impossibile avviare il client: errore nel login.");
+        }
+    }
+    
+    private String askPassword() {
+        PasswordDialog pd = new PasswordDialog();
+        return pd.getAnswer();
     }
     
     public void editProfile(String username){

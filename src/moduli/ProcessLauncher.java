@@ -20,11 +20,12 @@ import java.util.logging.Logger;
 public class ProcessLauncher {
     private String username;
     private String sessionKey;
+    private Controller controller;
     
     private static String applicationName = "minslayer";
     
-    public ProcessLauncher(){
-        
+    public ProcessLauncher(Controller controller){
+        this.controller = controller;
     }
     
     public void launch(){
@@ -33,12 +34,28 @@ public class ProcessLauncher {
             return;
         }
         
+        //reading setting
+        OptionManager om = controller.getAccount().getOption();
+        
+        //optifine selection
+        String optifine = om.getOptifineVersion();
+        
+        //fullscreen
+        boolean fullscreen = om.isFullscreen();
+        
+        //width, height
+        int width = om.getX();
+        int height = om.getY();
+        
+        //memory
+        String memory = om.getMemory();
+        
         //generate all classPath for launch minecraft
         String classPath = "";
         String path = getWorkingDirectory().toURI().getPath();
         
         //add here class that need to be loaded before libraries
-        classPath += "" + path + "core/OptiFine_ultra.jar";
+        classPath += "" + path + "core/OptiFine_"+ optifine +".jar";
         classPath += ";" + path + "core/minecraftforge.jar";
         //classPath += ";" + path + "core/OptiFine.jar";
         
@@ -60,6 +77,13 @@ public class ProcessLauncher {
         params.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
         params.add("-Dfml.ignorePatchDiscrepancies=true");
         
+        params.add("-XX:ParallelGCThreads=2");
+        params.add("-XX:+AggressiveOpts");
+        params.add("-XX:MaxPermSize=256M");
+        
+        params.add("-Xmx"+ memory+"m");
+        params.add("-Xms256m");
+        
         params.add("-classpath");
         params.add(classPath);
         //params.add("net.minecraft.client.main.Main");
@@ -78,6 +102,14 @@ public class ProcessLauncher {
         //params.add("-width " + dir);
         //params.add("-height " + dir);
         //params.add("-fullscreen");
+        if(fullscreen){
+            params.add("-fullscreen");
+        }
+        else{
+            params.add("-width " + width);
+            params.add("-height " + height);
+        }
+            
         ////params.add("-userProperties {}");
         ////params.add("-uuid 294c588d44ea4324a389587f0e7f9d02");
         

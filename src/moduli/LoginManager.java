@@ -84,7 +84,7 @@ public class LoginManager {
             }
         }
         
-        return error;
+        return !error;
     }
     
     public boolean passLogin(){
@@ -145,7 +145,7 @@ public class LoginManager {
                 connection.disconnect();
             }
         }
-        return error;
+        return !error;
     }
 
     public String getUsername() {

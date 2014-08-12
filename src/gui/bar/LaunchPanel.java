@@ -96,6 +96,13 @@ public class LaunchPanel extends LauncherPanel{
         launchButton.setFont(Style.buttonFont);
         launchButton.setBackground(Style.buttonBackground);
         launchButton.setForeground(Style.buttonForeground);
+        launchButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.launch();
+            }
+        });
         LauncherPanel row2 = new LauncherPanel();
         row2.setLayout(new BorderLayout());
         row2.add(launchButton, BorderLayout.CENTER);
