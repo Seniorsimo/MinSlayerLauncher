@@ -78,7 +78,9 @@ public class LaunchPanel extends LauncherPanel{
         });
         
         row1Bis = new LauncherPanel();
-        row1Bis.setLayout(new FlowLayout(FlowLayout.LEADING));
+        FlowLayout fl = new FlowLayout(FlowLayout.LEADING);
+        fl.setHgap(0);
+        row1Bis.setLayout(fl);
         row1Bis.add(editButton);
         row1Bis.add(newButton);
         row1Bis.add(optionButton);

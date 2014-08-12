@@ -132,7 +132,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             LauncherPanel text = new LauncherPanel();
             text.setLayout(new GridLayout(1,1));
             //JTextArea tp = new JTextArea(p.getContent());
-            JEditorPane tp = new JEditorPane("text/html",Style.postPosts+p.getContent()+ Style.postPosts);
+            JEditorPane tp = new JEditorPane("text/html",Style.prePosts+p.getContent()+ Style.postPosts);
             //tp.setText(p.getContent());
             tp.setEditable(false);
             tp.setBackground(new Color(0,0,0,0));
@@ -185,7 +185,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             //scrollPane.setBounds(0, 0, 50, 100);
             scrollPane.setOpaque(false);
             //scrollPane.getViewport().setOpaque(false);
-            scrollPane.getViewport().setBackground(new Color(255,255,255,70));
+            scrollPane.getViewport().setBackground(new Color(0,0,0,70));
             scrollPane.setBorder(null);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
