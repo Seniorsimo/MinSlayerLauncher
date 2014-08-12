@@ -21,6 +21,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import moduli.Controller;
 import moduli.StreamerListener;
 import moduli.Style;
@@ -34,11 +36,16 @@ import moduli.streamer.NewsStreamer.Post;
 public class NewsPanel extends LauncherPanel implements StreamerListener{
     
     private Controller controller;
+    private LauncherPanel contentPane;
 
     public NewsPanel(Controller controller) {
         this.controller = controller;
-        build(null);
+        this.setLayout(new GridLayout(1,1));
+        
         final NewsPanel np = this;
+        
+        build(null);
+        
         
         //custom font
 //        try {
@@ -147,9 +154,17 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
     private void build(LauncherPanel[] list) {
         this.removeAll();
         if(list!=null){
+            
+            contentPane = new LauncherPanel();
+            //contentPane.setPreferredSize(new Dimension(500, 400));
+            //contentPane.add(scrollPane);
+            
+            
+        
             //FlowLayout l = new FlowLayout(FlowLayout.LEFT);
-            this.setAutoscrolls(true);
-            this.setLayout(new GridBagLayout());
+            contentPane.setAutoscrolls(true);
+            contentPane.setBorder(new EmptyBorder(10,10,10,10));
+            contentPane.setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.anchor = GridBagConstraints.NORTHWEST;
             gbc.weightx = 0.0;
@@ -160,12 +175,25 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             
             
             for(LauncherPanel p:list){
-                this.add(p, gbc);
+                contentPane.add(p, gbc);
             }
             gbc.weightx = 1.0;
             gbc.weighty = 1.0;
-            this.add(new JLabel(), gbc);
+            contentPane.add(new JLabel(), gbc);
+            
+            JScrollPane scrollPane = new JScrollPane(contentPane);
+            //scrollPane.setBounds(0, 0, 50, 100);
+            scrollPane.setOpaque(false);
+            //scrollPane.getViewport().setOpaque(false);
+            scrollPane.getViewport().setBackground(new Color(255,255,255,70));
+            scrollPane.setBorder(null);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            
+            this.add(scrollPane);
         }
+        //contentPane.revalidate();
         revalidate();
+        //repaint();
     }
 }

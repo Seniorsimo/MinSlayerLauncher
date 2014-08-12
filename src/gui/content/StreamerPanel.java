@@ -29,6 +29,7 @@ public class StreamerPanel extends LauncherPanel{
     public StreamerPanel(Controller controller){
         super();
         this.controller = controller;
+        this.setBorder(new EmptyBorder(10,10,10,10));
         
         bar = new LauncherPanel();
         bar.setLayout(new BorderLayout());
@@ -44,6 +45,7 @@ public class StreamerPanel extends LauncherPanel{
             }
         });
         bar.add(bt, BorderLayout.EAST);
+        bar.setBorder(new EmptyBorder(0,0,10,0));
         news = new NewsPanel(controller);
         change = new ChangePanel(controller);
         
