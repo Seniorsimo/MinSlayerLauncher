@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 import moduli.Controller;
 import moduli.Style;
 
@@ -47,6 +48,7 @@ public class StreamerPanel extends LauncherPanel{
         change = new ChangePanel(controller);
         
         this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(10,10,10,10));
         
         refreshView();
         

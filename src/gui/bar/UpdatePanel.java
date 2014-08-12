@@ -5,6 +5,7 @@
 package gui.bar;
 
 import gui.LauncherPanel;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -40,7 +41,15 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
         string1.setForeground(Style.mainForeground);
         string2 = new JLabel("");
         string2.setForeground(Style.mainForeground);
-        bar1 = new JProgressBar(0, 100);
+        bar1 = new JProgressBar(0, 100){
+            @Override
+            protected void paintComponent(Graphics g)
+            {
+                g.setColor( getBackground() );
+                g.fillRect(0, 0, getWidth(), getHeight());
+                super.paintComponent(g);
+            }
+        };
         bar1.setValue(0);
         bar1.setStringPainted(true);
         bar1.setOpaque(false);
@@ -48,7 +57,15 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
         //current.setLocation(10, 140);
         bar1.setForeground(Style.barForeground);
         bar1.setBackground(Style.barBackground);
-        bar2 = new JProgressBar(0, 100);
+        bar2 = new JProgressBar(0, 100){
+            @Override
+            protected void paintComponent(Graphics g)
+            {
+                g.setColor( getBackground() );
+                g.fillRect(0, 0, getWidth(), getHeight());
+                super.paintComponent(g);
+            }
+        };
         bar2.setValue(0);
         bar2.setStringPainted(true);
         bar2.setOpaque(false);

@@ -17,8 +17,8 @@ public class Style {
     public static Color mainForeground = Color.white;
     public static Color buttonBackground = Color.BLUE;
     public static Color buttonForeground = Color.orange;
-    public static Color barBackground = new Color(/*0xD8D8D8*/10,10,10,100);
-    public static Color barForeground = new Color(0xFF9933);
+    public static Color barBackground = new Color(/*0xD8D8D8*/120,120,150,150);
+    public static Color barForeground = new Color(/*0xFF9933*/20,20,255,255);
     
     //font
     public static Font titleFont = new Font("Arial", Font.BOLD, 26);
