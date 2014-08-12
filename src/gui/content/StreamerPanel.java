@@ -8,16 +8,11 @@ import gui.LauncherPanel;
 import gui.content.sreamer.ChangePanel;
 import gui.content.sreamer.NewsPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.JButton;
 import moduli.Controller;
-import moduli.StreamerListener;
 import moduli.Style;
-import moduli.streamer.NewsStreamer;
-import moduli.streamer.NewsStreamer.Post;
 
 /**
  *

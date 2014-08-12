@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import moduli.Controller;
 import moduli.OptionManager;
-import moduli.Style;
 
 /**
  *

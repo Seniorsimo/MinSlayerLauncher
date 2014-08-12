@@ -5,17 +5,10 @@
 package gui.bar;
 
 import gui.LauncherPanel;
-import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.ProgressBarUI;
-import javax.swing.plaf.basic.BasicProgressBarUI;
-import javax.swing.plaf.metal.MetalProgressBarUI;
-import javax.swing.plaf.multi.MultiProgressBarUI;
-import javax.swing.plaf.synth.SynthProgressBarUI;
 import moduli.Controller;
 import moduli.Style;
 import moduli.UpdateListener;

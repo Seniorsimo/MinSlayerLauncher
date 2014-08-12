@@ -4,10 +4,8 @@
  */
 package moduli;
 
-import gui.LauncherPanel;
 import gui.MainWindow;
 import java.util.ArrayList;
-import moduli.streamer.NewsStreamer;
 import moduli.updater.GameUpdater;
 import moduli.updater.LauncherUpdater;
 

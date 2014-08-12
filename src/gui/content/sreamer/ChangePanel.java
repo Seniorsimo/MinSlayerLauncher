@@ -8,7 +8,6 @@ import gui.LauncherPanel;
 import java.util.List;
 import moduli.Controller;
 import moduli.StreamerListener;
-import moduli.streamer.NewsStreamer;
 
 /**
  *

@@ -5,7 +5,6 @@
 package gui.content;
 
 import gui.LauncherPanel;
-import java.awt.PopupMenu;
 import moduli.Controller;
 
 /**

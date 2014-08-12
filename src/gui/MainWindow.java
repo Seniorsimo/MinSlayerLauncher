@@ -7,7 +7,6 @@ package gui;
 import gui.bar.BarPanel;
 import gui.content.ContentPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import javax.swing.JFrame;
 import moduli.Controller;
 import moduli.Style;
