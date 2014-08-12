@@ -4,6 +4,7 @@
  */
 package minslayerlauncher;
 
+import gui.LoggerWindow;
 import moduli.Controller;
 import moduli.LauncherLogger;
 
@@ -24,6 +25,7 @@ public class MinSlayerLauncher {
         pc.launch();*/
         
         LauncherLogger lg = new LauncherLogger();
+        LoggerWindow lw = new LoggerWindow(lg);
         
         /*LoginManager lm = new LoginManager();
         lm.setUsername("seniorsimo@hotmail.it");

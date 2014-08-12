@@ -150,14 +150,6 @@ public class Controller {
     public String[] getProfileList(){
         return accounts.toArray(new String[accounts.size()]);
     }
-    
-    public void showNews(){
-        
-    }
-    
-    public void showChangelog(){
-        
-    }
 
     public Account getAccount() {
         return account;
@@ -165,6 +157,11 @@ public class Controller {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+    
+    public void close(){
+        //da implementare
+        System.exit(0);
     }
     
     private static enum state{

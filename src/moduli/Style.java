@@ -32,6 +32,8 @@ public class Style {
     //hardCoded parts
     public static String preNewsPosts = "<html><font size=\"4\" style=\"color: #ffffff\">";
     public static String preChangePosts = "<html><font size=\"4\" style=\"color: #ffffff\">";
+    public static String preLog = "<html><font size=\"4\" style=\"color: #ffffff\">";
     public static String postNewsPosts = "</font></html>";
     public static String postChangePosts = "</font></html>";
+    public static String postLog = "</font></html>";
 }

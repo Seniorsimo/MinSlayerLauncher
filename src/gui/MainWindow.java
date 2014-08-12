@@ -12,6 +12,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -28,13 +30,34 @@ public class MainWindow extends JFrame{
     private LauncherPanel panel; 
     private Controller controller;
     
-    public MainWindow(Controller controller){
-        super();
+    public MainWindow(final Controller controller){
+        super("MinSlayer Launcher");
         this.controller = controller;
         //setting varie
         this.setSize(800, 600);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent arg0) {
+                //creo un thread a perte per forzare la terminazione nel caso il resto non funzioni
+                new Thread() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(30000L);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("FORCING EXIT!");
+                        System.exit(1);
+                    }
+                }.start();
+                //Fermo e chiudo l'eventuale launcher avviato
+                controller.close();
+            }
+        });
         panel = new MainPanel(controller);
         this.getContentPane().add("Center", panel);
         this.setVisible(true);

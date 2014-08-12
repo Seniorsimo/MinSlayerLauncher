@@ -25,6 +25,7 @@ public class LauncherLogger {
     private PrintStream oldOut;
     public ArrayList<String> logList;
     private int logEntry = 2000;
+    private LoggerListener listener;
     
     public LauncherLogger(){
         logList = new ArrayList<String>();
@@ -48,6 +49,11 @@ public class LauncherLogger {
         }
         //stampo anche sul vecchio out
         oldOut.println(s);
+        if(listener!=null) listener.refreshGUI(logList);
+    }
+    
+    public void registerListener(LoggerListener l){
+        listener = l;
     }
     
     
