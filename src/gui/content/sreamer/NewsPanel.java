@@ -89,8 +89,8 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             header.setLayout(new BorderLayout());
             JLabel title = new JLabel(p.getTitle());
             
-            title.setForeground(new Color(227,189,38));
-            title.setFont(Style.titleFont);
+            title.setForeground(Style.titleNewsColor);
+            title.setFont(Style.titleNewsFont);
             
             title.addMouseListener(new MouseListener(){
 
@@ -123,7 +123,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             });
             JLabel date = new JLabel(p.getDate().toString());
             
-            date.setForeground(Color.white);
+            date.setForeground(Style.dateNewsColor);
             date.setFont(Style.dateFont);
             
             header.add(title, BorderLayout.CENTER);
@@ -132,7 +132,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
             LauncherPanel text = new LauncherPanel();
             text.setLayout(new GridLayout(1,1));
             //JTextArea tp = new JTextArea(p.getContent());
-            JEditorPane tp = new JEditorPane("text/html",Style.prePosts+p.getContent()+ Style.postPosts);
+            JEditorPane tp = new JEditorPane("text/html",Style.preNewsPosts+p.getContent()+ Style.postNewsPosts);
             //tp.setText(p.getContent());
             tp.setEditable(false);
             tp.setBackground(new Color(0,0,0,0));
