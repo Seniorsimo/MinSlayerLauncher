@@ -230,5 +230,6 @@ public class GameUpdater extends Updater{
     @Override
     public void close() {
         interrupted = true;
+        gui.refreshStatus("closing", "0", "0", "", 100);
     }
 }
