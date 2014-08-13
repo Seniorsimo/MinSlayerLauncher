@@ -27,7 +27,8 @@ public class LauncherLogger {
     private int logEntry = 2000;
     private LoggerListener listener;
     
-    public LauncherLogger(){
+    public LauncherLogger(LoggerListener l){
+        listener = l;
         logList = new ArrayList<String>();
         LoggerPrintStream lps = new LoggerPrintStream();
         PrintStream myOut = new PrintStream(lps);
@@ -52,9 +53,9 @@ public class LauncherLogger {
         if(listener!=null) listener.refreshGUI(logList);
     }
     
-    public void registerListener(LoggerListener l){
-        listener = l;
-    }
+//    public void registerListener(LoggerListener l){
+//        listener = l;
+//    }
     
     
     //L' output stream definito da noi
