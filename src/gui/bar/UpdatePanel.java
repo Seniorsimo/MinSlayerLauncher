@@ -92,6 +92,9 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
                     if ((g instanceof Graphics2D)) {
                     Graphics2D gg = (Graphics2D) g;
                     
+//                    gg.setPaint(new GradientPaint(new Point2D.Float(0.0F, 0.0F), u.getForeground(), new Point2D.Float(0.0F, getHeight()), u.getForeground()));
+//                    gg.fillRect(0, 0, w, getHeight());
+                    
                     gg.setPaint(new GradientPaint(new Point2D.Float(0.0F, 0.0F), new Color(0,0,0,100), new Point2D.Float(0.0F, getHeight()/2), u.getBackground()));
                     gg.fillRect(0, 0, w, getHeight()/2);
 
