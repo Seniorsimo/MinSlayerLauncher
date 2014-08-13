@@ -157,10 +157,7 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         out += Style.postLog;
         text.setText(out);
         
-        
-        revalidate();
-        repaint();
-        
+        scroll.setViewportView(text);
         JScrollBar bar = scroll.getVerticalScrollBar();
         bar.setValue(bar.getMaximum());
     }

@@ -25,7 +25,8 @@ public class MinSlayerLauncher {
         pc.launch();*/
         
         LauncherLogger lg = new LauncherLogger();
-        LoggerWindow lw = new LoggerWindow(lg);
+        new LoggerWindow(lg);
+        
         
         /*LoginManager lm = new LoginManager();
         lm.setUsername("seniorsimo@hotmail.it");
