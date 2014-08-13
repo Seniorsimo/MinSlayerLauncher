@@ -30,6 +30,7 @@ public class LauncherUpdater extends Updater{
     private UpdateListener gui;
     private String version = "2.0.1";
     private String baseUrl = "https://dl.dropboxusercontent.com/u/238575247/minslayer/";
+    private boolean interrupted = false;
     
     public LauncherUpdater(UpdateListener lp) {
         gui = lp;
@@ -41,6 +42,7 @@ public class LauncherUpdater extends Updater{
         try {
             URL versionUrl = new URL(baseUrl + "launcherVersion.txt");
             BufferedReader in = new BufferedReader(new InputStreamReader(versionUrl.openStream()));
+            if(interrupted) return false;
             String remoteVersion = in.readLine().trim();
             System.out.println("client Launcher Version : " + version);
             System.out.println("server Launcher Version : " + remoteVersion);
@@ -67,6 +69,7 @@ public class LauncherUpdater extends Updater{
     @Override
     public boolean download() {
         boolean errorOccurred = false;
+        if(interrupted) return false;
         gui.refreshStatus("download", "1", "1", baseUrl + "MinSlayerLauncher.jar", 0);
         //gui.refreshStatus("download", "1", "2", baseUrl + "MinSlayerLauncher.jar", 0);
         try {
@@ -88,6 +91,7 @@ public class LauncherUpdater extends Updater{
                 float Percent = (totalDataRead * 100) / filesize;
                 //current.setValue((int) Percent);
                 gui.refreshStatus("download2", "", "", "", Percent);
+                if(interrupted) return false;
             }
             bout.close();
             in.close();
@@ -130,6 +134,7 @@ public class LauncherUpdater extends Updater{
 
     @Override
     public boolean install() {
+        if(interrupted) return false;
         boolean error = false;
         gui.refreshStatus("install", "", "", "", 0);
         
@@ -174,6 +179,11 @@ public class LauncherUpdater extends Updater{
             System.out.println(e.toString());
         }
         System.exit(0);
+    }
+
+    @Override
+    public void close() {
+        interrupted = true;
     }
 
     

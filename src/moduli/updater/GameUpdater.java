@@ -36,6 +36,7 @@ public class GameUpdater extends Updater{
     private ArrayList<String> toUpdateUrls;
     private String baseUrl = "https://dl.dropboxusercontent.com/u/238575247/minslayer/";
     private UpdateListener gui;
+    private boolean interrupted = false;
     
     public GameUpdater(UpdateListener lp){
         this.gui = lp;
@@ -56,6 +57,7 @@ public class GameUpdater extends Updater{
             URL versionUrl = new URL(baseUrl + "version.txt");
             BufferedReader in = new BufferedReader(new InputStreamReader(versionUrl.openStream()));
             //parsificarne il contenuto in una lista di oggetti "versione"?
+            if(interrupted) return false;
             ArrayList<String> newVersions = new ArrayList<>();
             String line;
             while((line = in.readLine())!=null){
@@ -74,6 +76,7 @@ public class GameUpdater extends Updater{
                     toUpdateUrls.add(path);
                 }
                 fileList.put(path, version);
+                if(interrupted) return false;
             }
         //se daaggiornare è vuoto restituisci false, altrimenti true
         } catch (MalformedURLException ex) {
@@ -105,6 +108,7 @@ public class GameUpdater extends Updater{
             //versions.remove(url);
             gui.refreshStatus("download", ""+counter, total+"", url, 100);
             counter++;
+            if(interrupted) return false;
         }
         
         //se errori false, altrimenti true.
@@ -143,7 +147,21 @@ public class GameUpdater extends Updater{
                 it.remove(); // avoids a ConcurrentModificationException
             }
         }
+        
+        //no interruzione: salvo lista completa
         versions = fileList2;
+        
+        //se interrotto version deve contenere solo i realmente scaricati, quindi rimuovo i non scaricati
+        if(interrupted){
+            if(toUpdateUrls!=null){
+                while(!toUpdateUrls.isEmpty()){
+                    String temp = toUpdateUrls.remove(0);
+                    if(versions.containsKey(temp))
+                        versions.remove(temp);
+                }
+            }
+        }
+        
         DataManager.getDataManager().save(versions, "versions");
         gui.refreshStatus("end", "0", "0", "", 100);
         //se errori false altriemnti true
@@ -207,5 +225,10 @@ public class GameUpdater extends Updater{
     private void remove(String path){
         File f = new File(ProcessLauncher.getWorkingDirectory().toURI().getPath() + path);
         if(f.exists()) f.delete();
+    }
+
+    @Override
+    public void close() {
+        interrupted = true;
     }
 }

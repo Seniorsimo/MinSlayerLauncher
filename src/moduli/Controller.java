@@ -11,6 +11,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -30,6 +32,7 @@ public class Controller {
     private boolean showingChangelog = false;
     private ArrayList<String> accounts;
     private OptionManager defaultOption = new OptionManager(false, 800, 600, "ultra", "1024");
+    private boolean runningUpdate = false;
     
     public Controller(){
         accounts = (ArrayList<String>) DataManager.getDataManager().load("saved_accounts");
@@ -50,14 +53,18 @@ public class Controller {
     
     public void checkUpdate(UpdateListener lp){
         //launcher
+        runningUpdate = true;
         if(!Updater.update(new LauncherUpdater(lp))){
             System.out.println("Error occurred while trying to donwload launcher update.");
         }
         
         //client
+        runningUpdate = true;
         if(!Updater.update(new GameUpdater(lp))){
             System.out.println("Error occurred while trying to donwload game update.");
         }
+        
+        runningUpdate = false;
         
     }
     
@@ -161,7 +168,22 @@ public class Controller {
     
     public void close(){
         //da implementare
-        System.exit(0);
+        //if(runningUpdate) Updater.closeUp();
+        Thread t = new Thread(){
+            @Override
+            public void run(){
+                while(runningUpdate){
+                    try {
+                        Updater.closeUp();
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                System.exit(0);
+            }
+        };
+        t.start();
     }
     
     private static enum state{

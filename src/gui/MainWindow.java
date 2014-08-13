@@ -37,23 +37,10 @@ public class MainWindow extends JFrame{
         this.setSize(800, 600);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent arg0) {
-                //creo un thread a perte per forzare la terminazione nel caso il resto non funzioni
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(30000L);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("FORCING EXIT!");
-                        System.exit(1);
-                    }
-                }.start();
                 //Fermo e chiudo l'eventuale launcher avviato
                 controller.close();
             }
