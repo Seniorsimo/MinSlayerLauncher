@@ -26,6 +26,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import moduli.LauncherLogger;
@@ -156,8 +157,12 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         out += Style.postLog;
         text.setText(out);
         
+        
         revalidate();
         repaint();
+        
+        JScrollBar bar = scroll.getVerticalScrollBar();
+        bar.setValue(bar.getMaximum());
     }
     
     

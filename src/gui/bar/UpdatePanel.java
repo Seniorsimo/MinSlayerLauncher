@@ -125,11 +125,13 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
                 super.paintComponent(g);
             }
     }
+    
+    int z = 0;
 
     @Override
     public void refreshStatus(String status, String currentIndex, String total, String nameFile, double percent) {
-        int x,y,z,temp;
-        z = 0;
+        int x,y,temp;
+        
         switch(status){
             case "cheking":
                 downloading = false;
