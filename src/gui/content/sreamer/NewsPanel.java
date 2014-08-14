@@ -67,6 +67,7 @@ public class NewsPanel extends LauncherPanel implements StreamerListener{
          }
         };
         //SwingUtilities.invokeLater(t);
+        t.setDaemon(true);
         t.start();
         
 //        Font[] list = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();

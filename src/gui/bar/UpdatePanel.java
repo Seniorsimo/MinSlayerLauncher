@@ -67,6 +67,7 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
          }
         };
         //SwingUtilities.invokeLater(t);
+        t.setDaemon(true);
         t.start();
     }
     

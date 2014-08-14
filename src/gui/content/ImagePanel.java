@@ -44,6 +44,7 @@ class ImagePanel extends LauncherPanel {
                 }
             }
         };
+        t.setDaemon(true);
         t.start();
     }
     

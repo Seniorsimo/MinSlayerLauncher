@@ -183,6 +183,7 @@ public class Controller {
                 System.exit(0);
             }
         };
+        t.setDaemon(true);
         t.start();
     }
     
