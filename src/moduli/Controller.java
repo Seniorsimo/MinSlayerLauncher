@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -46,6 +47,13 @@ public class Controller {
         
         //infine avvia la gui
         new MainWindow(this);
+        
+        //avvia suoni: non usato x incompatibilità formato
+//        try {
+//            Sound.playSound("assets/music/hal3.ogg");
+//        } catch (UnsupportedAudioFileException ex) {
+//            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         
         
