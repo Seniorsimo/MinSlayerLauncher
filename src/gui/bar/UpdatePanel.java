@@ -123,7 +123,7 @@ public class UpdatePanel extends LauncherPanel implements UpdateListener{
                     gg.fillRect(0, getHeight()/2, getWidth(), getHeight()/2);
                 }
                 
-                super.paintComponent(g);
+               super.paintComponent(g);
             }
     }
     

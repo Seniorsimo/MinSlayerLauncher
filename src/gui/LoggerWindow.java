@@ -43,7 +43,7 @@ public class LoggerWindow extends JFrame implements LoggerListener{
     Image bgImage;
     JScrollPane scroll;
 
-    public LoggerWindow(LauncherLogger lg) {
+    public LoggerWindow(/*LauncherLogger lg*/) {
         super("Log");
         
         try {
@@ -127,7 +127,7 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         
         panel.add(control, BorderLayout.SOUTH);
         
-        lg.registerListener(this);
+        //lg.registerListener(this);
         
         final LoggerWindow i = this;
         this.addWindowListener(new WindowAdapter() {
@@ -157,12 +157,10 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         out += Style.postLog;
         text.setText(out);
         
-        
-        revalidate();
-        repaint();
-        
-        JScrollBar bar = scroll.getVerticalScrollBar();
-        bar.setValue(bar.getMaximum());
+        text.setCaretPosition(text.getDocument().getLength()-1);
+        //scroll.setViewportView(text);
+//        JScrollBar bar = scroll.getVerticalScrollBar();
+//        bar.setValue(bar.getMaximum());
     }
     
     
