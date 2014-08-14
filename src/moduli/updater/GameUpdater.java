@@ -166,7 +166,7 @@ public class GameUpdater extends Updater{
         gui.refreshStatus("end", "0", "0", "", 100);
         //se errori false altriemnti true
         
-        return error;
+        return !error;
     }
     
     private boolean download(String u){
