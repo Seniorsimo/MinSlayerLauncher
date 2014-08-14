@@ -113,7 +113,7 @@ public class ProcessLauncher {
         ////params.add("-userProperties {}");
         ////params.add("-uuid 294c588d44ea4324a389587f0e7f9d02");
         
-        System.out.println(params.toString());
+        //System.out.println(params.toString());
         final ProcessBuilder pb = new ProcessBuilder(params);
         pb.redirectErrorStream(true);
         
