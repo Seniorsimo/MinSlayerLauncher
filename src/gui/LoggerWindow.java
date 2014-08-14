@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import moduli.LauncherLogger;
 import moduli.LoggerListener;
@@ -102,7 +103,7 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         text.setEditable(false);
         text.setOpaque(false);
         scroll = new JScrollPane(text);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.getViewport().setBackground(new Color(255,255,255,50));
         scroll.setOpaque(false);
@@ -157,7 +158,14 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         out += Style.postLog;
         text.setText(out);
         
-        text.setCaretPosition(text.getDocument().getLength()-1);
+//        SwingUtilities.invokeLater(new Runnable(){
+//
+//            @Override
+//            public void run() {
+//                text.setCaretPosition(text.getDocument().getLength());
+//            }
+//        });
+        text.setCaretPosition(text.getDocument().getLength());
         //scroll.setViewportView(text);
 //        JScrollBar bar = scroll.getVerticalScrollBar();
 //        bar.setValue(bar.getMaximum());

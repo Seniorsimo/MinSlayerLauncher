@@ -106,15 +106,15 @@ public class ProcessLauncher {
             params.add("-fullscreen");
         }
         else{
-            params.add("-width " + width);
-            params.add("-height " + height);
+            params.add("-w" + width);
+            params.add("-h" + height);
         }
             
         ////params.add("-userProperties {}");
         ////params.add("-uuid 294c588d44ea4324a389587f0e7f9d02");
         
         System.out.println(params.toString());
-        ProcessBuilder pb = new ProcessBuilder(params);
+        final ProcessBuilder pb = new ProcessBuilder(params);
         pb.redirectErrorStream(true);
         
 //        System.out.println(LWJGLUtil.getPlatform());
@@ -124,23 +124,30 @@ public class ProcessLauncher {
 //            System.out.println("--" + s);
 //        }
 //        
-//        
-        Process process;
-        try {
-            process = pb.start();
-            if (process == null) {
-                System.out.println("Unable to cread process");
+//       
+        Thread t = new Thread(){
+            @Override
+            public void run(){
+                Process process;
+                try {
+                    process = pb.start();
+                    if (process == null) {
+                        System.out.println("Unable to cread process");
+                    }
+                    BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+                    String line = null;
+                    while ( (line = br.readLine()) != null) {
+                       System.out.println(line);
+                    }
+                } catch (IOException ex) {
+                    System.out.println("Error: " + ex.toString());
+                }
+                System.exit(0);
             }
-            BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            
-            String line = null;
-            while ( (line = br.readLine()) != null) {
-               System.out.println(line);
-            }
-        } catch (IOException ex) {
-            System.out.println("Error: " + ex.toString());
-        }
-        System.exit(0);
+        };
+        t.setDaemon(true);
+        t.start();
         
         
     }

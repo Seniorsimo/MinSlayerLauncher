@@ -34,6 +34,7 @@ public class Controller {
     private ArrayList<String> accounts;
     private OptionManager defaultOption = new OptionManager(false, 800, 600, "ultra", "1024");
     private boolean runningUpdate = false;
+    private MainWindow launcher;
     
     public Controller(){
         accounts = (ArrayList<String>) DataManager.getDataManager().load("saved_accounts");
@@ -46,7 +47,7 @@ public class Controller {
             account = new Account(defaultOption, "guest");
         
         //infine avvia la gui
-        new MainWindow(this);
+        launcher = new MainWindow(this);
         
         //avvia suoni: non usato x incompatibilità formato
 //        try {
@@ -111,6 +112,7 @@ public class Controller {
             pl.setSessionKey(lm.getAccessToken());
             
             pl.launch();
+            launcher.setVisible(false);
         }
         else{
             System.out.println("Errore: impossibile avviare il client: errore nel login.");
