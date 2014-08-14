@@ -12,6 +12,8 @@ import java.util.List;
  */
 public interface LoggerListener {
     
-    public void refreshGUI(List<String> list);
+    //public void refreshGUI(List<String> list);
+    
+    public void log(String txt);
     
 }

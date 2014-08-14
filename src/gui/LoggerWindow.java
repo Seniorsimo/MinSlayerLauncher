@@ -20,6 +20,8 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -28,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import moduli.LauncherLogger;
@@ -40,7 +43,7 @@ import moduli.Style;
  */
 public class LoggerWindow extends JFrame implements LoggerListener{
     
-    JEditorPane text;
+    JTextArea text;
     Image bgImage;
     JScrollPane scroll;
 
@@ -99,9 +102,12 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         title.setForeground(Style.mainForeground);
         panel.add(title, BorderLayout.NORTH);
         
-        text = new JEditorPane("text/html","");
+        //text = new JEditorPane("text/html","");
+        text = new JTextArea();
+        
         text.setEditable(false);
         text.setOpaque(false);
+        text.setForeground(Style.mainForeground);
         scroll = new JScrollPane(text);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -145,30 +151,57 @@ public class LoggerWindow extends JFrame implements LoggerListener{
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.getContentPane().add("Center", panel);
         this.setVisible(true);
+//        final LoggerWindow lw = this;
+//        
+//        Thread t = new Thread(){
+//            @Override
+//            public void run(){
+//                while(true){
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(LoggerWindow.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                    lw.revalidate();
+//                }
+//            }
+//        };
+//        t.setDaemon(true);
+//        t.start();
     }
     
     
 
+//    @Override
+//    public void refreshGUI(List<String> list) {
+//        String out = Style.preLog;
+//        for(String s:list){
+//            out+=s+"<br>";
+//        }
+//        out += Style.postLog;
+//        text.setText(out);
+//        
+////        SwingUtilities.invokeLater(new Runnable(){
+////
+////            @Override
+////            public void run() {
+////                text.setCaretPosition(text.getDocument().getLength());
+////            }
+////        });
+//        text.setCaretPosition(text.getDocument().getLength());
+//        //scroll.setViewportView(text);
+////        JScrollBar bar = scroll.getVerticalScrollBar();
+////        bar.setValue(bar.getMaximum());
+//    }
+    
     @Override
-    public void refreshGUI(List<String> list) {
-        String out = Style.preLog;
-        for(String s:list){
-            out+=s+"<br>";
-        }
-        out += Style.postLog;
-        text.setText(out);
-        
-//        SwingUtilities.invokeLater(new Runnable(){
-//
-//            @Override
-//            public void run() {
-//                text.setCaretPosition(text.getDocument().getLength());
-//            }
-//        });
-        text.setCaretPosition(text.getDocument().getLength());
-        //scroll.setViewportView(text);
-//        JScrollBar bar = scroll.getVerticalScrollBar();
-//        bar.setValue(bar.getMaximum());
+    public void log(final String txt){
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                text.append(txt + "\n");
+            }
+        });
     }
     
     

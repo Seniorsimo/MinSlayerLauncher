@@ -40,17 +40,18 @@ public class LauncherLogger {
     private void add(String s){
         //filtro le new line esagerate
         if(s.length()==2&&(s.toCharArray()[0]=='\n'||s.toCharArray()[1]=='\n')) return;
-        logList.add(s);
-        int size = logList.size();
-        if(size>logEntry){
-            int rem = size-logEntry;
-            for(int i=0; i<rem; i++){
-                logList.remove(0);
-            }
-        }
+//        logList.add(s);
+//        int size = logList.size();
+//        if(size>logEntry){
+//            int rem = size-logEntry;
+//            for(int i=0; i<rem; i++){
+//                logList.remove(0);
+//            }
+//        }
         //stampo anche sul vecchio out
         oldOut.println(s);
-        if(listener!=null) listener.refreshGUI(logList);
+        //if(listener!=null) listener.refreshGUI(logList);
+        if(listener!=null) listener.log(s);
     }
     
 //    public void registerListener(LoggerListener l){
